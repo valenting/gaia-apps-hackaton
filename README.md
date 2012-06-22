@@ -36,7 +36,7 @@ http://www.w3schools.com/html/html_css.asp
 Mozilla Romania: https://www.facebook.com/MozillaRomania
 
 IRC channels on moznet (irc.mozilla.org):
-#b2g
-#gaia
-#romania
+  #b2g
+  #gaia
+  #romania
 
