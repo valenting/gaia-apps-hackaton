@@ -4,39 +4,38 @@ gaia-apps-hackaton
 Webapps for Boot2Gecko's User Interface (Gaia)
 
 Resources:
-
+---
 Installing Gaia on Ubuntu:
 http://www.youtube.com/watch?v=s1Qe-mx0Ysw
 
 Info on Boot2Gecko, Gaia and WebAPI:
-https://developer.mozilla.org/en/Mozilla/Boot_to_Gecko/
-
-https://wiki.mozilla.org/B2G
-https://wiki.mozilla.org/B2G/Architecture
-
-https://wiki.mozilla.org/Gaia
-https://wiki.mozilla.org/Gaia/Hacking
-
-https://wiki.mozilla.org/WebAPI
-
-https://etherpad.mozilla.org/gaia-apps-ideas
+---
+https://developer.mozilla.org/en/Mozilla/Boot_to_Gecko/ <br/>
+https://wiki.mozilla.org/B2G <br/>
+https://wiki.mozilla.org/B2G/Architecture <br/>
+https://wiki.mozilla.org/Gaia <br/>
+https://wiki.mozilla.org/Gaia/Hacking <br/>
+https://wiki.mozilla.org/WebAPI <br/> <br/>
 http://htmlpad.org/gaia-apps-hackaton/#
 
+Ideas for apps
+---
+https://etherpad.mozilla.org/gaia-apps-ideas <br/>
 
 
 You can play with best tool for beginners:
 https://thimble.webmaker.org/en-US/
 
-Links to be read :
-http://www.w3schools.com/
-http://www.w3schools.com/js/default.asp
-http://www.w3schools.com/html/default.asp
-http://www.w3schools.com/html/html_css.asp
+Links to be read : <br/>
+http://www.w3schools.com/ <br/>
+http://www.w3schools.com/js/default.asp <br/>
+http://www.w3schools.com/html/default.asp <br/>
+http://www.w3schools.com/html/html_css.asp <br/>
 
 Mozilla Romania: https://www.facebook.com/MozillaRomania
 
-IRC channels on moznet (irc.mozilla.org):
-  #b2g
-  #gaia
-  #romania
+IRC channels on moznet (irc.mozilla.org): <br/>
+  #b2g <br/>
+  #gaia <br/>
+  #romania <br/>
 
