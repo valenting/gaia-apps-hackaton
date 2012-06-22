@@ -22,6 +22,12 @@ Ideas for apps
 ---
 https://etherpad.mozilla.org/gaia-apps-ideas <br/>
 
+Existing apps' source code:
+---
+https://github.com/mozilla-b2g/gaia/tree/master/apps
+
+Web development stuff
+---
 
 You can play with best tool for beginners:
 https://thimble.webmaker.org/en-US/
