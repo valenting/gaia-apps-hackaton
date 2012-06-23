@@ -3,10 +3,20 @@ gaia-apps-hackaton
 
 Webapps for Boot2Gecko's User Interface (Gaia)
 
+
+Help yourself to refreshments!
+Pizza @ 14:00
+
 Resources:
 ---
 Installing Gaia on Ubuntu:
 http://www.youtube.com/watch?v=s1Qe-mx0Ysw
+
+Pizza
+---
+http://www.pizzadominium.ro/ <br/>
+https://etherpad.mozilla.org/bucharest-hackaton-pizza <br/>
+
 
 Info on Boot2Gecko, Gaia and WebAPI:
 ---
