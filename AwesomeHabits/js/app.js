@@ -14,8 +14,9 @@ for (var di = 0; di < 7; di++) {
     dailyHabits[di][hi]=0;
   }
 }
-$(".pretend").click( function(e) { e.preventDefault(); currentDay=parseInt($(this).attr("id")); $(".visualstate").hide().promise().done( function() { rewriteEachDayDivFromScratch(); $("#eachday").show(); } ); } );
-$("#gohome").click( function(e) { e.preventDefault(); $(".visualstate").hide().promise().done( function() { $("#welcomescreen").show(); } ); } );
+
+$(".pretend").on("click", function(e) { e.preventDefault(); currentDay=parseInt($(this).attr("id")); $("#welcomescreen").hide(); rewriteEachDayDivFromScratch(); $("#eachday").show(); } );
+$("#gohome").on("click", function(e) { e.preventDefault(); $(".visualstate").hide(); $("#welcomescreen").show(); } );
 function rewriteEachDayDivFromScratch()
 {
   $("#eachday").html("");

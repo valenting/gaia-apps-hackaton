@@ -47,9 +47,8 @@ $(function(){
       e.preventDefault()
       console.log("in show");
       window.track.render();
-      $(".visualstate").hide().promise().done( function() { 
-        $('#trackprogress').show();
-      });
+      $(".visualstate").hide();
+      $('#trackprogress').show();
       
     },    
     //keep data when model is available & bind
