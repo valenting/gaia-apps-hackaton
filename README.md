@@ -12,6 +12,12 @@ Resources:
 Installing Gaia on Ubuntu:
 http://www.youtube.com/watch?v=s1Qe-mx0Ysw
 
+Pizza
+---
+http://www.pizzadominium.ro/ <br/>
+https://etherpad.mozilla.org/bucharest-hackaton-pizza <br/>
+
+
 Info on Boot2Gecko, Gaia and WebAPI:
 ---
 https://developer.mozilla.org/en/Mozilla/Boot_to_Gecko/ <br/>
