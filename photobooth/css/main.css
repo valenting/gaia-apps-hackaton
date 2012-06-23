@@ -1,0 +1,33 @@
+
+canvas {
+	opacity:0;
+}
+
+img {
+	display:none;
+	border: 10px solid white;
+	border-bottom: 40px solid white;
+	box-shadow: 0 0 5px #aaa;
+}
+
+video {
+	background:#fff;
+	border:10px solid white;
+	border-bottom: 40px solid white;
+	box-shadow:0 0 5px #aaa;
+}
+
+input[type=range] {
+	position:relative;
+}
+
+input[type=range]:after {
+	content: attr(data-value);
+	position:absolute;
+	right:-20px;
+	top:0;
+}
+
+.hero-unit {
+	margin-top:5%;
+}
