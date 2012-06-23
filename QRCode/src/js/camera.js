@@ -20,9 +20,12 @@ var Camera = {
   },
 
   init: function cameraInit() {
+    this.captureButton.addEventListener('click', function() {
+        alert("Capture");    
+    });
     this.switchButton.addEventListener('click', this.toggleCamera.bind(this));
-    this.galleryButton.addEventListener('click', function() {
-      // This is bad. It should eventually become a Web Intent.
+    this.galleryButton.addEventListener('click', function() {      
+	// This is bad. It should eventually become a Web Intent.
       var host = document.location.host;
       var domain = host.replace(/(^[\w\d]+\.)?([\w\d]+\.[a-z]+)/, '$2');
       window.parent.WindowManager.launch('http://gallery.' + domain);
@@ -46,8 +49,10 @@ var Camera = {
     viewfinder.style.left = left + 'px';
 
     var transform = 'rotate(90deg)';
-    if (this._camera == 1)
+    if (this._camera == 1) {
+      alert("Camera noastra");
       transform += ' scale(-1, 1)';
+    }
 
     viewfinder.style.MozTransform = transform;
 

@@ -1,0 +1,52 @@
+<head>
+    <script type="text/javascript">
+        function GetFileInfo () {
+            var fileInput = document.getElementById ("fileInput");
+
+            var message = "";
+            if ('files' in fileInput) {
+                if (fileInput.files.length == 0) {
+                    message = "Please browse for one or more files.";
+                } else {
+                    for (var i = 0; i < fileInput.files.length; i++) {
+                        alert(fileInput.files[0].baseURI);
+                        message += "<br /><b>" + (i+1) + ". file</b><br />";
+                        var file = fileInput.files[i];
+                        if ('name' in file) {
+                            message += "name: " + file.name + "<br />";
+                        }
+                        else {
+                            message += "name: " + file.fileName + "<br />";
+                        }
+                        if ('size' in file) {
+                            message += "size: " + file.size + " bytes <br />";
+                        }
+                        else {
+                            message += "size: " + file.fileSize + " bytes <br />";
+                        }
+                        if ('mediaType' in file) {
+                            message += "type: " + file.mediaType + "<br />";
+                        }
+                    }
+                }
+            } 
+            else {
+                if (fileInput.value == "") {
+                    message += "Please browse for one or more files.";
+                    message += "<br />Use the Control or Shift key for multiple selection.";
+                }
+                else {
+                    message += "Your browser doesn't support the files property!";
+                    message += "<br />The path of the selected file: " + fileInput.value;
+                }
+            }
+
+            var info = document.getElementById ("info");
+            info.innerHTML = message;
+        }
+    </script>
+</head>
+<body onload="GetFileInfo ()">
+    <input type="file" id="fileInput" multiple="multiple" size="60" onchange="GetFileInfo ()" />
+    <div id="info" style="margin-top:30px"></div>
+</body>
