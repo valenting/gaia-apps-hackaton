@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title> Brick Braker </title>
-	<link type="text/css" rel="stylesheet" href="stylesheet.css">
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"> </script>
-	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Box2DJS - Physics Engine for JavaScript</title>
 
 		<!--=============================-->
 		<!-- Copy this part to your app. -->
@@ -83,15 +80,28 @@
 		<!--=============================-->
 		<!-- Copy this part to your app. -->
 		<!-- END                         -->
-		<!--=============================-->	
-	
-	<script type="text/javascript" src="brick.js"> </script>
-</head>
+		<!--=============================-->
+
+		<!-- demos -->
+    <script src='demos/draw_world.js'></script>
+    <script src='demos/demo_base.js'></script>
+    <script src='demos/top.js'></script>
+    <script src='demos/stack.js'></script>
+    <script src='demos/compound.js'></script>
+    <script src='demos/pendulum.js'></script>
+    <script src='demos/crank.js'></script>
+    <script src='demos/demos.js'></script>
+
+    <script src='style/prettify.js'></script>
+		<link href="style/prettify.css" rel="stylesheet" type="text/css" />
+		<script>Event.observe(window, 'load', function() {prettyPrint()});</script>
+
+		<link href="style/distant-planet.css" rel="stylesheet" type="text/css" />
+		<link href="style/box2d.css" rel="stylesheet" type="text/css" />
+  </head>
 <body>
 
-    <canvas id="canvas">
-	</canvas>
-
-
+    <canvas id="canvas" width='500px' height='300' style="top:260px; left:125px;"></canvas>
+	
 </body>
 </html>
