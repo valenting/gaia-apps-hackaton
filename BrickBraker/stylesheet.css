@@ -3,15 +3,50 @@
 body {
 	width:482px;
 	margin:10px auto;
-	padding:100px 240px;
+	padding:10px 240px;
 	border:1px dashed #CCC;
 	-moz-user-select:none;
 }
 
 
+#install {
+	width:150px;
+	margin:0 auto;
+	padding:10px;
+	text-align:center;
+	font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+	font-size:22px;
+	color:#FFF;
+	background-image: -moz-linear-gradient(top, rgb(76,219,28) 25%, rgb(52,194,39) 60%);
+	border-radius:3px;
+}
+
+#install:hover {
+	cursor:pointer;
+	background-image: -moz-linear-gradient(top, rgb(77,150,227) 25%, rgb(24,106,194) 60%);
+}
+
+
+#start {
+	width:150px;
+	margin:0 auto 50px;
+	padding:10px;
+	text-align:center;
+	font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+	font-size:18px;
+	color:#FFF;
+	background-image: -moz-linear-gradient(top, rgb(76,219,28) 25%, rgb(52,194,39) 60%);
+	border-radius:3px;
+	-moz-user-select:none;
+}
+
+#start:hover {
+	cursor:pointer;
+	background-image: -moz-linear-gradient(top, rgb(77,150,227) 25%, rgb(24,106,194) 60%);
+}
+
 #canvas {
-	width: 400px;
-	height: 400px;
 	margin: 0 auto;
 	border: 1px dashed #666;
 }
+
