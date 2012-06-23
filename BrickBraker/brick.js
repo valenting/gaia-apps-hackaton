@@ -20,7 +20,7 @@ var Bar = {
 	X : 100,
 	Y : 700,
 	
-	speed : 20,
+	speed : 10,
 }
  
 
