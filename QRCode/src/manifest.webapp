@@ -1,0 +1,20 @@
+{
+  "name": "QR Scanner",
+  "description": "A basic QR Reader",
+  "launch_path": "/",
+  "developer": {
+    "name": "Hackaton",
+    "url": "https://github.com/valenting/gaia-apps-hackaton"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Camera2",
+      "description": "Gaia Camera"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "120": "/style/icons/Camera.png",
+    "60": "/style/icons/60/Camera.png"
+  }
+}
