@@ -1,0 +1,25 @@
+{  
+	"version": "1.0",  
+	"name": "GaiaPuzzle",  
+	"description": "My first web application",  
+	"icons": {  
+		"16": "/image/icon-16.png",  
+		"48": "/image/icon-48.png",  
+		"128": "/image/icon-128.png"  
+	},  
+	"developer": {  
+		"name": "Gabriel Ivanica",  
+		"url": "http://mozillalabs.com"  
+	},  
+	"installs_allowed_from": ["*"],  
+	"locales": {  
+		"es": {  
+			"description": "¡Acción abierta emocionante del desarrollo del Web!",  
+			"developer": {  
+				"url": "http://es.mozillalabs.com/"  
+			}  
+		}
+	},  
+	"default_locale": "en"  
+ 
+}
