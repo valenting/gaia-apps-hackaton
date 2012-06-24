@@ -1,84 +1,86 @@
 <html>
-<body>
-<script language="JavaScript">
-	function main() {
-		// clear html body
-		while (document.body.hasChildNodes()) {
-			document.body.removeChild(document.body.firstChild);
-		}
-		
-		// counter
-		var i=0;
-
-		// create object
-		var img = new Array();
-
-		// set image list
-		var imageName = "";
-
-		// start preloading
-		for(i=1; i<=17; i++) {
-			// compose file image name
-			imageName = i.toString();
-			imageName = imageName.concat('t.jpg');
-		
-			// create new img tag
-			img[i] = document.createElement("img");
-			img[i].src = "TemplatePics\\"+imageName;
-			img[i].id = i;
-			img[i].addEventListener("click",setSource);
-			document.body.appendChild(img[i]);
-		
-			// add space between img tags
-			document.write(' ');
-		
-			if(i%3==0) {
-				// add new line
-				var br = document.createElement("br");
-				document.body.appendChild(br);
+	<head>
+	</head>
+	<body>
+		<script language="JavaScript">
+			function main() {
+				var myDiv=document.body.getElementById("indexpage");
+				// clear html body
+				while (myDiv.hasChildNodes()) {
+					myDiv.removeChild(myDiv.firstChild);
+				}
+			
+				// counter
+				var i=0;
+	
+				// create object
+				var img = new Array();
+	
+				// set image list
+				var imageName = "";
+	
+				// start preloading
+				for(i=1; i<=17; i++) {
+					// compose file image name
+					imageName = i.toString();
+					imageName = imageName.concat('t.jpg');
+			
+					// create new img tag
+					img[i] = document.createElement("img");
+					img[i].src = "TemplatePics\\"+imageName;
+					img[i].id = i;
+					img[i].addEventListener("click",setSource);
+					myDiv.appendChild(img[i]);
+			
+					// add space between img tags
+					myDiv.write(' ');
+			
+					if(i%3==0) {
+						// add new line
+						var br = document.createElement("br");
+						myDiv.appendChild(br);
+					}
+				}
 			}
-		}
-	}
-	
-	var canvas  = null;
-	var context = null;
-	var oimagine = null;
-	
-	function setSource() {
-		// get id attribute of img tag
-		id = this.id;
 		
-		// clear html body
-		while (document.body.hasChildNodes()) {
-			document.body.removeChild(document.body.firstChild);
-		}
+			var canvas  = null;
+			var context = null;
+			var oimagine = null;
 		
-		// add main img tag
-		imageName = id.toString();
-		imageName = imageName.concat('.jpg');
+			function setSource() {
+			// get id attribute of img tag
+				id = this.id;
+			
+			// clear html body
+				while (document.body.hasChildNodes()) {
+					document.body.removeChild(document.body.firstChild);
+				}
+			
+				// add main img tag
+				imageName = id.toString();
+				imageName = imageName.concat('.jpg');
+			
+				//create the canvas <3
+				canvas = document.createElement("canvas");
+				canvas.id="thecanvas";
+					
+				document.body.appendChild(canvas);
+				context = canvas.getContext("2d");
+				//context.drawImage(img, 0, 0, img.height, img.width);
+				oimagine=new Image();
+				oimagine.src="TemplatePics\\"+imageName;
+				oimagine.addEventListener('load', drawcentralimage);
+			}
 		
-		//create the canvas <3
-		canvas = document.createElement("canvas");
-		canvas.id="thecanvas";
-				
-		document.body.appendChild(canvas);
-		context = canvas.getContext("2d");
-		//context.drawImage(img, 0, 0, img.height, img.width);
-		oimagine=new Image();
-		oimagine.src="TemplatePics\\"+imageName;
-		oimagine.addEventListener('load', drawcentralimage);
+			function drawcentralimage()
+			{
+				canvas.width=oimagine.width;
+				canvas.height=oimagine.height;
+				context.drawImage(oimagine,0,0,oimagine.width,oimagine.height);
+			}
 		
-	}
-	
-	function drawcentralimage()
-	{
-		canvas.width=oimagine.width;
-		canvas.height=oimagine.height;
-		context.drawImage(oimagine,0,0,oimagine.width,oimagine.height);
-	}
-	
-	main();
-</script>
+			
+		</script>
 
-</body>
+	</body>
 </html>

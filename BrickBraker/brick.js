@@ -12,23 +12,23 @@ function Element(X, Y) {
 	this.X = X;
 	this.Y = Y;
 	this.size = 10;
-	this.speedX = 3;
-	this.speedY = 3;
-	this.defaultSpeed = 3;
-	this.draw = true;
+	this.width = 10;
+	this.height = 10;
+	
+	this.speedX = 5;
+	this.speedY = 5;
+	this.dir = 0;
+	
+	this.setSize = function (width, height) {
+		this.width = width;
+		this.height = height;
+	}
 }
 
-var Bar = {
-	X : 100,
-	Y : 700,
-	
-	speed : 10,
-}
- 
 
 var Game = {
 	ball : null,
-	bricks : null,
+	bar : null,
 }
 
 
@@ -41,26 +41,31 @@ var Canvas = {
 
 	init : function () {
 		Game.ball = new Element(20, 20);
-		window.onkeypress = Canvas.doKeyDown;
-		
-		Game.bricks = new Array();
-		Game.bricks[0] = new Element(15,30);
+		Game.bar = new Element(100, 700);
+		Game.bar.setSize(100, 20);
 
-		document.getElementById("canvas").addEventListener('mousemove', function(evt){
+		document.getElementById("canvas").addEventListener('mousedown', function(evt){
 			this.mouse = getMousePos(CNV, evt);
-			if (this.mouse.x > Bar.X + 40 )
-				Bar.X += Bar.speed;
-			if (this.mouse.x < Bar.X + 50 )
-				Bar.X -= Bar.speed;
+			if (this.mouse.x <= Canvas.sizeX / 2)
+				Game.bar.dir = -5; 
+			else 
+				Game.bar.dir = 5; 
 //			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
 //			writeMessage(CNV, message);
 		}, false);
 
 
 
+		document.getElementById("canvas").addEventListener('mouseup', function(evt){
+				Game.bar.dir = 0; 
+		}, false);
+
+
+
+
 		function render() {
 			if (Canvas.gameover == 0) {
-				mozRequestAnimationFrame(render);
+				requestAnimFrame(render);
 				Canvas.draw();
 			}
 			
@@ -70,14 +75,31 @@ var Canvas = {
 		render();
 	},
 	
+	
+	addTouchEvent : function (event) {
+		for (var i = 0; i < event.touches.length; i++) {
+			var touch = event.touches[i];
+			CTX.beginPath();
+			CTX.arc(touch.pageX, touch.pageY, 20, 0, 2*Math.PI, true);
+			CTX.fill();
+			CTX.stroke();
+		}
+	},
+	
 	draw : function () {
 		CTX.clearRect(0, 0, 480, 800);
 
 		this.animateBall(Game.ball);
-		this.drawBricks(Game.bricks);
-		
+		this.animateBar(Game.bar);
+
 		CTX.fillStyle = "#000";
-		CTX.fillRect(Bar.X, Bar.Y, 100, 20);
+		CTX.fillRect(Game.bar.X, Game.bar.Y, 100, 20);
+	},
+
+
+	animateBar : function (bar) {
+		bar.X += bar.dir;
+		CTX.fillRect(bar.X, bar.Y, 100, 20);
 	},
 
 	animateBall : function (ball) {
@@ -87,14 +109,14 @@ var Canvas = {
 		if ( (ball.Y + ball.size) >= this.sizeY || ball.Y <= ball.size)
 			ball.speedY = (-1) * ball.speedY;
 
-		if ( ball.Y + ball.size >= Bar.Y) {
-			if (ball.X > Bar.X - 5 && ball.X < Bar.X + 105)
-				//ball.speedY = (-1) * ball.speedY;
-				ball.speedY = -1 * ((ball.defaultSpeed +2 ) *(1-Math.abs(Bar.X - ball.X +50)/60));
+		if ( ball.Y + ball.size >= Game.bar.Y) {
+			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + 100 + ball.size)
+				ball.speedY = (-1) * ball.speedY;
 			else 
 				Canvas.gameover = 1;
 		}
-		
+
+
 		ball.X += ball.speedX;
 		ball.Y += ball.speedY;
 
@@ -103,27 +125,18 @@ var Canvas = {
 		CTX.closePath();
 		CTX.fill();		
 	},
-	
-	drawBricks: function(bricks) {
-		for(i = 0;i<bricks.length;i++) {
-			CTX.fillStyle = "#000";
-			CTX.fillRect(bricks[i].X, bricks[i].Y, 30, 15);
-		}
-	},
 
-	doKeyDown : function (e) {
-		switch (e.keyCode) {
+	doKeyDown : function (event) {
+		switch (event.keyCode) {
 				case 37: /*Left arrow*/
-						Bar.X -= Bar.speed;
+						Game.bar.X -= Game.bar.speed;
 					break;
 				case 39: /*Right arrow*/
-						Bar.X += Bar.speed;
+						Game.bar.X += Game.bar.speed;
 					break;
 		}
 	}
-	
 }
-
 
 
 function writeMessage(canvas, message){
@@ -155,3 +168,15 @@ function getMousePos(canvas, evt){
     };
 }
 
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame|| 
+	window.webkitRequestAnimationFrame	|| 
+	window.mozRequestAnimationFrame		|| 
+	window.oRequestAnimationFram		|| 
+	window.msRequestAnimationFrame		|| 
+	function( callback ){
+		window.setTimeout(callback, 1000 / 60);
+	};
+})();
