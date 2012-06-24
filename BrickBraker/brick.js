@@ -25,78 +25,37 @@ window.requestAnimFrame = (function(){
 
 
 var Levels = {
-	levelNo : 0,
-	level : new Array ( new Array (0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 0, 0, 0, 0, 0,
-				       0, 0, 0, 1, 0, 0, 0, 0
-							 	),
-
-			    new Array (0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0
-							 	),
-
-			    new Array (0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0
-							 	),
-
-			    new Array (0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0
-							 	),
-
-			    new Array (0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0,
-				       0, 0, 1, 1, 1, 1, 0, 0
-							 	)
-
-									),
+	level : new Array ( 
+				new Array (
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 1
+				),
+	
+				new Array (
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0, 0, 0, 0, 1
+				)
+			),
 }
 
 
@@ -153,6 +112,8 @@ var Game = {
 	ball : null,
 	bar : null,
 	bricks : null,
+	levelNo : 0,
+	maxLevel : 5,
 }
 
 
@@ -167,6 +128,7 @@ var Canvas = {
 	defaultSpeed : 1,
 	
 	start : function () {
+		
 		CNV.removeEventListener('mousedown', Canvas.start); 
 		
 		Canvas.gameover = 0;		
@@ -181,12 +143,12 @@ var Canvas = {
 			for(j = 20; j<460;j+=55,k++) {
 				Game.bricks[k] = new Element(j,i);
 				Game.bricks[k].setSize(50,20);
-				if (Levels.level[Levels.levelNo][k] == 0){
+				if (Levels.level[Game.levelNo][k] == 0){
 						Game.bricks[k].draw = false;
 				
 				}
 				else{
-				Canvas.bricksLeft ++;
+					Canvas.bricksLeft ++;
 				}
 			}
 		}
@@ -208,13 +170,25 @@ var Canvas = {
 		this.addMouseDir();
 		
 		function render() {
-			if (Canvas.gameover == 0 && Canvas.bricks != 0) {
+			if (Canvas.gameover == 0 && Canvas.bricksLeft != 0) {
 				requestAnimFrame(render);
 				Canvas.draw();
 			}
 			
 			else {
-				writeMessage(CNV, "Game Over");
+				if (Canvas.gameover == 1)
+					writeMessage(CNV, "Game Over");
+					
+				if (Canvas.bricksLeft == 0) {
+					if (Game.levelNo < Levels.level.length - 1 ) {
+						writeMessage(CNV, "Click for the next Level");
+						Game.levelNo++;
+					}
+					else {
+						writeMessage(CNV, "You've finished the game!");
+						Game.levelNo = 0;
+					}
+				}
 				CNV.addEventListener('mousedown', Canvas.start, false);
 			}
 		}
@@ -234,7 +208,7 @@ var Canvas = {
 		CTX.fillRect(Game.bar.X, Game.bar.Y, 100, 20);
 	},
 	
-	drawBricks: function(bricks,ball) {
+	drawBricks: function(bricks, ball) {
 		for(i = 0;i<bricks.length;i++) {
 			if(bricks[i].draw == true) {
 				bricks[i].colision(ball);
