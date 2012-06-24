@@ -7,6 +7,8 @@ var video = document.querySelector('#video')
 	, imgur = ''
 	, userPos;
 
+$('.be-social').hide();
+
 var oFReader = new FileReader();
 
 oFReader.onload = function (oFREvent) {
@@ -17,10 +19,21 @@ oFReader.onload = function (oFREvent) {
 	for (var i = 0; i < imgs.length; i++) {
 		imgs[i].src = oFREvent.target.result;
 	}
+	
+	renderToCanvas(oFREvent.target.result);
 };
 
-var renderToCanvas = function (img) {
-	ctx.drawImage(img, 0, 0);
+var renderToCanvas = function (src) {
+	var image = new Image();
+	image.src = src;
+	img = document.querySelector('.largePreview');
+	image.addEventListener("load",
+	    function(){
+		canvas.width = image.width;
+		canvas.height = image.height;
+	     ctx.drawImage(this, 0, 0, image.width, image.height);
+	    } ,
+	    false);
 };
 
 
@@ -82,8 +95,6 @@ var saturate = function() {
 	img.src = canvas.toDataURL('image/webp');
 };
 
-
-
 var updateSliders = function() {
 	this.dataset['value'] = this.value;
 };
@@ -99,7 +110,6 @@ var success = function (localStream) {
 };
 
 var failure = function () {
-	
 	video.parentNode.removeChild(video);
 	var holder = document.querySelector('#holder');
 	holder.innerHTML = '<div id="fileHolder"><div class="folder-icon"></div><input type="file" id="fileURL"/></div>';
@@ -142,18 +152,26 @@ var imgur = canvas.toDataURL().split(',')[1];
         },
         dataType: 'json'
     }).success(function(data) {
-        console.log(data);
+    	console.log(data);
+		var url = 'https://twitter.com/share?url='+data.upload.links.original+'&text=Just took a pic with Photobooth';
+		$('.twitter').attr('href', url);
     }).error(function(data) {
        console.log(data);
     });
 }
 
-document.querySelector('#share').addEventListener('click', share);
+//document.querySelector('#share').addEventListener('click', share);
 
 if(navigator.webkitGetUserMedia)
-	navigator.webkitGetUserMedia({video:true}, failure);
+	navigator.webkitGetUserMedia({video:true}, success);
 else 
 	failure();
+
+$('.btn-success').on('click', function(){
+	$(this).hide();
+	$('.be-social').show();
+	share();
+});
 
 document.querySelector('#snapshot').addEventListener('click', snapshot);
 document.querySelector('#sepia').addEventListener('click', sepia);
