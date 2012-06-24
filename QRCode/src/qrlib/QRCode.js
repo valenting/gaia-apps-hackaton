@@ -255,7 +255,6 @@ qrcode.grayscale = function(){
 
 
 
-
 function URShift( number,  bits)
 {
 	if (number >= 0)
