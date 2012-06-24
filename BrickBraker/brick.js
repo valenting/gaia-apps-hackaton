@@ -12,8 +12,10 @@ function Element(X, Y) {
 	this.X = X;
 	this.Y = Y;
 	this.size = 10;
-	this.speedX = 5;
-	this.speedY = 5;
+	this.speedX = 3;
+	this.speedY = 3;
+	this.defaultSpeed = 3;
+	this.draw = true;
 }
 
 var Bar = {
@@ -26,6 +28,7 @@ var Bar = {
 
 var Game = {
 	ball : null,
+	bricks : null,
 }
 
 
@@ -39,7 +42,9 @@ var Canvas = {
 	init : function () {
 		Game.ball = new Element(20, 20);
 		window.onkeypress = Canvas.doKeyDown;
-
+		
+		Game.bricks = new Array();
+		Game.bricks[0] = new Element(15,30);
 
 		document.getElementById("canvas").addEventListener('mousemove', function(evt){
 			this.mouse = getMousePos(CNV, evt);
@@ -69,7 +74,8 @@ var Canvas = {
 		CTX.clearRect(0, 0, 480, 800);
 
 		this.animateBall(Game.ball);
-
+		this.drawBricks(Game.bricks);
+		
 		CTX.fillStyle = "#000";
 		CTX.fillRect(Bar.X, Bar.Y, 100, 20);
 	},
@@ -82,13 +88,13 @@ var Canvas = {
 			ball.speedY = (-1) * ball.speedY;
 
 		if ( ball.Y + ball.size >= Bar.Y) {
-			if (ball.X > Bar.X && ball.X < Bar.X + 100)
-				ball.speedY = (-1) * ball.speedY;
+			if (ball.X > Bar.X - 5 && ball.X < Bar.X + 105)
+				//ball.speedY = (-1) * ball.speedY;
+				ball.speedY = -1 * ((ball.defaultSpeed +2 ) *(1-Math.abs(Bar.X - ball.X +50)/60));
 			else 
 				Canvas.gameover = 1;
 		}
-
-
+		
 		ball.X += ball.speedX;
 		ball.Y += ball.speedY;
 
@@ -96,6 +102,13 @@ var Canvas = {
 		CTX.arc(ball.X, ball.Y, ball.size, 0, Math.PI*2, true);	
 		CTX.closePath();
 		CTX.fill();		
+	},
+	
+	drawBricks: function(bricks) {
+		for(i = 0;i<bricks.length;i++) {
+			CTX.fillStyle = "#000";
+			CTX.fillRect(bricks[i].X, bricks[i].Y, 30, 15);
+		}
 	},
 
 	doKeyDown : function (e) {
