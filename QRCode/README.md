@@ -1,3 +1,3 @@
 Contributors:
-Mihai Tiganus
+Mihai Tiganus,
 Vlase Paul
