@@ -6,6 +6,13 @@
 		var textcolor="FFFFFF";
 		function goBackToIndex()
 		{
+			uppertextfield.value='Upper caption';
+			lowertextfield.value='Lower caption';
+			textcolor="FFFFFF";
+			document.getElementById("indexpage").style.left='0px';
+			document.getElementById("editpage").style.visibility='hidden';
+			document.getElementById("editpage").style.left='500px';
+			
 		}
 		function updateUpper()
 		{
@@ -110,6 +117,6 @@
 			fb_script.src = "http://static.ak.fbcdn.net/connect.php/js/FB.Share";
 			fb_script.type = "text/javascript";
 			fb_div.appendChild(fb_script);
-			var buttonzdiv=document.getElementById("buttonz");
+			var buttonzdiv=document.getElementById("allthebuttons");
 			buttonzdiv.appendChild(fb_div);
 		}
