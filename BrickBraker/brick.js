@@ -87,7 +87,8 @@ var Canvas = {
 	sizeY : 800,
 	mouse : null,
 	gameover : 0,
-
+	defaultSpeed : 5,
+		
 	init : function () {
 		Game.ball = new Element(20, 20);
 		Game.bar = new Element(100, 725);
@@ -105,6 +106,27 @@ var Canvas = {
 			}
 		}
 		
+<<<<<<< HEAD
+=======
+		document.getElementById("canvas").addEventListener('mousedown', function(evt){
+			this.mouse = getMousePos(CNV, evt);
+			if (this.mouse.x <= Canvas.sizeX / 2)
+				Game.bar.dir = -2*Game.bar.speedX; 
+			else 
+				Game.bar.dir = 2*Game.bar.speedY; 
+//			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
+//			writeMessage(CNV, message);
+		}, false);
+
+
+
+		document.getElementById("canvas").addEventListener('mouseup', function(evt){
+				Game.bar.dir = 0; 
+		}, false);
+
+
+
+>>>>>>> 94218045a59c1a65424798e4176d58773b2c74ac
 
 		function render() {
 			if (Canvas.gameover == 0) {
@@ -138,9 +160,7 @@ var Canvas = {
 					CTX.fillStyle = bricks[i].color;
 					CTX.fillRect(bricks[i].X, bricks[i].Y, bricks[i].width,bricks[i].height);
 				}
-				else 
-					return;
-				}
+			}
 		}
 	},
 
@@ -158,7 +178,7 @@ var Canvas = {
 
 		if ( ball.Y + ball.size >= Game.bar.Y) {
 			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + 100 + ball.size)
-				ball.speedY = (-1) * ball.speedY;
+				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X +50)/60));
 			else 
 				Canvas.gameover = 1;
 		}
