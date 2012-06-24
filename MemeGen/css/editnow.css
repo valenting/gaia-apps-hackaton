@@ -1,0 +1,23 @@
+body
+{
+	background-color:#56A5EC;
+}
+div#largeimage
+{
+	background-color:#56A5EC;
+	width:500px;
+	height:500px;
+}
+div.inputbox
+{
+	width:500px;
+}
+input.inputbox
+{
+	width:500px;
+}
+canvas#pozah
+{
+	width:500px;
+	height:500px;
+}
