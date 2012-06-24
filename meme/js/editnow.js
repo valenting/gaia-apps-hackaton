@@ -61,6 +61,7 @@
 		}
 
 		function share(){
+			
 			try {
 				var img = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
 			} catch(e) {
@@ -77,7 +78,7 @@
 				data: {
 					type: 'base64',
 					// get your key here, quick and fast http://imgur.com/register/api_anon
-					key: 'fc862c0aa18287070c439c8c0f039bca',
+					key: '34a77dab5131eb5745476073795f27a9',
 					name: 'meme.jpg',
 					title: 'Check out this meme pic I made!',
 					caption: 'Created with the hackaton Meme Generator!',
@@ -112,7 +113,7 @@
 			fb_a.setAttribute('share_url',link);// the link to be shared
 			fb_div.appendChild(fb_a);
 			
-			//	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share">
+			//<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share">
 			var fb_script = document.createElement("script");
 			fb_script.src = "http://static.ak.fbcdn.net/connect.php/js/FB.Share";
 			fb_script.type = "text/javascript";
