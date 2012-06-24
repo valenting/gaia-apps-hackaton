@@ -1,3 +1,3 @@
-Contributors:\n
-Mihai Tiganus,\n
+Contributors:
+Mihai Tiganus,
 Vlase Paul
