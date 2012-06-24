@@ -3,6 +3,7 @@
 		var uppertextfield=document.getElementById("uppertext");
 		var lowertextfield=document.getElementById("lowertext");
 		var centralimage=null;
+		var textcolor="FFFFFF";
 		function updateUpper()
 		{
 			clearAndRedraw();
@@ -22,8 +23,8 @@
 		function writeText(pos,text)
 		{
 			context.lineWidth=1;
-			context.fillStyle="#FFFFFF";
-			context.strokeStyle="#FFFFFF";
+			context.fillStyle="#"+textcolor;
+			context.strokeStyle="#"+textcolor;
 			context.font="bold 32px impact";
 			context.textAlign="center";
 			context.fillText(text,centralimage.width/2, pos, centralimage.width-100);
@@ -43,6 +44,11 @@
 			context.drawImage(centralimage,0,0,canvas.width,canvas.height);
 		}
 		
+		function setColor()
+		{
+			textcolor=document.getElementById("fontcolor").color;
+			clearAndRedraw();
+		}
 
 		function share(){
 			try {
