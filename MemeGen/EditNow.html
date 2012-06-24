@@ -20,7 +20,7 @@
 			<div id="buttonz">
 				<input type="button" value="Share on the internetz!" name="Share" onClick="share()"/>
 			</div>
-			<input type="text" name="lower" class="inputbox" id="imageURL" value=""/>
+			<input type="text" name="lower" class="inputbox" id="imageURL" value="" style="visibility:hidden"/>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/editnow.js"></script>
@@ -28,11 +28,7 @@
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
-		    drawCentralImage("socially-awkward-penguin.jpg");
-			clearAndRedraw();
-			//for some reason, simply calling clearAndRedraw() here doesn't work. fuck js.
-			writeText(50,uppertextfield.value);
-			writeText(450,lowertextfield.value);
+		    document.getElementById("editpage").style.visibility='hidden';
 			drawIndex();
 		}
 		function saveDrawing() {
