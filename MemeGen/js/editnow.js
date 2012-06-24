@@ -4,6 +4,9 @@
 		var lowertextfield=document.getElementById("lowertext");
 		var centralimage=null;
 		var textcolor="FFFFFF";
+		function goBackToIndex()
+		{
+		}
 		function updateUpper()
 		{
 			clearAndRedraw();
