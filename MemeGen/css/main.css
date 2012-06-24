@@ -1,0 +1,27 @@
+body
+{
+	background-color:#56A5EC;
+}
+div#largeimage
+{
+	background-color:#56A5EC;	
+}
+div#indexpage
+{
+	width:500px;
+	height:500px;
+	overflow:auto;
+}
+
+div.swappable
+{
+	position:relative;
+}
+div.inputbox
+{
+	width:500px;
+}
+img
+{
+	margin-left:5px;
+}
