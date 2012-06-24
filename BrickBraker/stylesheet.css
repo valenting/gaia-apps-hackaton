@@ -50,25 +50,3 @@ body {
 	border: 1px dashed #666;
 	z-index:3;
 }
-
-#touch {
-	height:100px;
-	position:absolute;
-	margin: -120px auto 0;
-	-moz-user-select:none;
-	z-index:2;
-}
-
-#touchLeft {
-	width:240px;
-	height:100%;
-	border:1px dashed #CCC;
-	float:left;
-}
-
-#touchRight {
-	width:240px;
-	height:100%;
-	border:1px dashed #CCC;
-	float:right;
-}

@@ -24,6 +24,11 @@ window.requestAnimFrame = (function(){
 
 
 
+var Levels = {
+	level1 : new Array (0, 0, 1, 1, 1, 1, 0, 0
+						),
+}
+
 
 function Element(X, Y) {
 	this.X = X;
@@ -90,8 +95,8 @@ var Canvas = {
 	defaultSpeed : 5,
 		
 	init : function () {
-		Game.ball = new Element(20, 20);
-		Game.bar = new Element(100, 725);
+		Game.ball = new Element((CNV.width - 20)/2, 705);
+		Game.bar = new Element((CNV.width - 100)/2, 725);
 		Game.bar.setSize(100, 20);
 
 
@@ -104,29 +109,7 @@ var Canvas = {
 			Game.bricks[k] = new Element(j,i);
 			Game.bricks[k].setSize(50,20);
 			}
-		}
-		
-<<<<<<< HEAD
-=======
-		document.getElementById("canvas").addEventListener('mousedown', function(evt){
-			this.mouse = getMousePos(CNV, evt);
-			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -2*Game.bar.speedX; 
-			else 
-				Game.bar.dir = 2*Game.bar.speedY; 
-//			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
-//			writeMessage(CNV, message);
-		}, false);
-
-
-
-		document.getElementById("canvas").addEventListener('mouseup', function(evt){
-				Game.bar.dir = 0; 
-		}, false);
-
-
-
->>>>>>> 94218045a59c1a65424798e4176d58773b2c74ac
+		}		
 
 		function render() {
 			if (Canvas.gameover == 0) {
@@ -165,8 +148,12 @@ var Canvas = {
 	},
 
 	animateBar : function (bar) {
+		if (bar.X + bar.dir < 0 || (bar.X + bar.dir + bar.width) > CNV.width)
+			return;
+			
 		bar.X += bar.dir;
 		CTX.fillRect(bar.X, bar.Y, 100, 20);
+		CTX.fillRect(CNV.width/2 , 650, 1, 100);
 	},
 
 	animateBall : function (ball) {
@@ -177,8 +164,8 @@ var Canvas = {
 			ball.speedY = (-1) * ball.speedY;
 
 		if ( ball.Y + ball.size >= Game.bar.Y) {
-			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + 100 + ball.size)
-				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X +50)/60));
+			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + Game.bar.width + ball.size)
+				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X + 50 )/60));
 			else 
 				Canvas.gameover = 1;
 		}
