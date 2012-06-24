@@ -12,11 +12,11 @@ $(window).load( function (e) {
 
 // shim layer with setTimeout fallback
 window.requestAnimFrame = (function(){
-	return  window.requestAnimationFrame|| 
-	window.webkitRequestAnimationFrame	|| 
-	window.mozRequestAnimationFrame		|| 
-	window.oRequestAnimationFram		|| 
-	window.msRequestAnimationFrame		|| 
+	return  window.requestAnimationFrame	|| 
+	window.webkitRequestAnimationFrame		|| 
+	window.mozRequestAnimationFrame			|| 
+	window.oRequestAnimationFram			|| 
+	window.msRequestAnimationFrame			|| 
 	function( callback ){
 		window.setTimeout(callback, 1000 / 60);
 	};
@@ -42,8 +42,14 @@ function Element(X, Y) {
 		this.width = width;
 		this.height = height;
 	}
+	
 	this.setColor = function (color) {
 		this.color = color;
+	}
+	
+	this.setSpped = function (speed) {
+		this.speedX = speed;
+		this.speedY = speed;
 	}
 	
 	this.colision = function (ball) {
@@ -87,9 +93,10 @@ var Canvas = {
 		Game.bar = new Element(100, 725);
 		Game.bar.setSize(100, 20);
 
-<<<<<<< HEAD
-		this.addMouseTouch();
-=======
+
+		this.addMouseDir();
+
+
 		Game.bricks = new Array();
 		for(k=0,i = 100;i<400;i+=25){
 			for(j = 75; j<405;j+=55,k++) {
@@ -97,55 +104,19 @@ var Canvas = {
 			Game.bricks[k].setSize(50,20);
 			}
 		}
-			
 		
-		document.getElementById("canvas").addEventListener('mousedown', function(evt){
-			this.mouse = getMousePos(CNV, evt);
-			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -5; 
-			else 
-				Game.bar.dir = 5; 
-//			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
-//			writeMessage(CNV, message);
-		}, false);
-
-
-
-		document.getElementById("canvas").addEventListener('mouseup', function(evt){
-				Game.bar.dir = 0; 
-		}, false);
-
->>>>>>> 5f3e704f42b6f2a5fa19fcbbc760d1cc35b67338
-
-
 
 		function render() {
-//			if (Canvas.gameover == 0) {
+			if (Canvas.gameover == 0) {
 				requestAnimFrame(render);
 				Canvas.draw();
-//			}
+			}
 			
-//			else writeMessage(CNV,"Game Over");
+			else writeMessage(CNV,"Game Over");
 		}
 
 		render();
 	},
-	
-	addMouseTouch : function  () {
-		$("#touchLeft").mousedown(function(e) {
-			Game.bar.dir = -Game.bar.speedX; 
-		});
-
-		$("#touchRight").mousedown(function(e) {
-			Game.bar.dir = Game.bar.speedX; 
-		});
-
-		$(document).mouseup(function (e) {
-			Game.bar.dir = 0; 
-		});
-
-	},
-	
 
 	
 	draw : function () {
@@ -201,6 +172,22 @@ var Canvas = {
 		CTX.closePath();
 		CTX.fill();		
 	},
+	
+	addMouseDir : function () {
+		CNV.addEventListener('mousedown', function(evt){
+			this.mouse = getMousePos(CNV, evt);
+			if (this.mouse.x <= Canvas.sizeX / 2)
+				Game.bar.dir = -Game.bar.speedX; 
+			else 
+				Game.bar.dir = Game.bar.speedX; 
+		}, false);
+
+
+
+		CNV.addEventListener('mouseup', function(evt){
+				Game.bar.dir = 0; 
+		}, false);		
+	}
 }
 
 
