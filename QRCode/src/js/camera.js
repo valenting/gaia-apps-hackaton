@@ -1,7 +1,7 @@
-'use strict';
+//'use strict';
+_fromCamera=1;
 
 var Camera = {
-  _fromCamera: 1,
   _camera: 0,
 
   get viewfinder() {
@@ -26,8 +26,7 @@ var Camera = {
     });
     this.switchButton.addEventListener('click', this.toggleCamera.bind(this));
     this.galleryButton.addEventListener('click', function() {
-        this._fromCamera = 0;
-        alert(this._fromCamera);
+        _fromCamera = 0;
         document.getElementById('imagefile').click();
     });
 
@@ -50,7 +49,6 @@ var Camera = {
 
     var transform = 'rotate(90deg)';
     if (this._camera == 1) {
-      alert("Camera noastra");
       transform += ' scale(-1, 1)';
     }
 
@@ -77,14 +75,11 @@ var Camera = {
   },
 
   toggleCamera: function toggleCamera() {
-    alert(this._fromCamera);
-    if (this._fromCamera == 1) {
-        alert("Toogle Camera");
+    if (_fromCamera == 1) {
         this._camera = 1 - this._camera;
         this.setSource(this._camera);
     }
     else {
-        alert("Toogle Browser");
         var html = '<video id="viewfinder" autoplay> </video>';
         document.getElementById("panel").innerHTML = html;
     }
