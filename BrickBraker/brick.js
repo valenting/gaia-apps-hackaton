@@ -1,11 +1,11 @@
 var CTX = null;
 var CNV = null;
 
-$(window).load( function (e) {
+window.onload = function (e) {
 	CNV = document.getElementById("canvas");
 	CTX = CNV.getContext('2d'); 
 	Canvas.start();	
-});
+};
 
 
 
