@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<div id="indexpage" class="swappable" style="float:left">
-		
+
 		</div>
 		<div id="editpage" class="swappable" style="float:left">
 			<div id="largeimage">
@@ -17,12 +17,19 @@
 			<div class="inputbox">
 				<input type="text" name="lower" class="inputbox" oninput="updateLower()" id="lowertext" value="Lower caption"/>
 			</div>
+			FontColor: <input id="fontcolor" class="color" value="FFFFFF" onchange="setColor()">
 			<div id="buttonz">
-				<input type="button" value="Share on the internetz!" name="Share" onClick="share()"/>
+				<div id="allthebuttons">
+					<input type="button" value="Back" name="Back" onClick="goBackToIndex()"/>
+					<input type="button" value="Share on the internetz!" name="Share" onClick="share()"/>
+				</div>
+				<input type="text" name="lower" class="inputbox" id="imageURL" value="" style="visibility:hidden"/>
 			</div>
-			<input type="text" name="lower" class="inputbox" id="imageURL" value="" style="visibility:hidden"/>
+			
 		</div>
 	</body>
+	
+	<script type="text/javascript" src="js/jscolor/jscolor.js"></script>
 	<script type="text/javascript" src="js/editnow.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>

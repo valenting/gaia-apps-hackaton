@@ -1,6 +1,7 @@
 'use strict';
 
 var Camera = {
+  _fromCamera: 1,
   _camera: 0,
 
   get viewfinder() {
@@ -24,11 +25,10 @@ var Camera = {
         alert("Capture");    
     });
     this.switchButton.addEventListener('click', this.toggleCamera.bind(this));
-    this.galleryButton.addEventListener('click', function() {      
-	// This is bad. It should eventually become a Web Intent.
-      var host = document.location.host;
-      var domain = host.replace(/(^[\w\d]+\.)?([\w\d]+\.[a-z]+)/, '$2');
-      window.parent.WindowManager.launch('http://gallery.' + domain);
+    this.galleryButton.addEventListener('click', function() {
+        this._fromCamera = 0;
+        alert(this._fromCamera);
+        document.getElementById('imagefile').click();
     });
 
     this.setSource(this._camera);
@@ -77,8 +77,17 @@ var Camera = {
   },
 
   toggleCamera: function toggleCamera() {
-    this._camera = 1 - this._camera;
-    this.setSource(this._camera);
+    alert(this._fromCamera);
+    if (this._fromCamera == 1) {
+        alert("Toogle Camera");
+        this._camera = 1 - this._camera;
+        this.setSource(this._camera);
+    }
+    else {
+        alert("Toogle Browser");
+        var html = '<video id="viewfinder" autoplay> </video>';
+        document.getElementById("panel").innerHTML = html;
+    }
   }
 
 };

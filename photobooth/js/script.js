@@ -1,10 +1,28 @@
-var video = document.querySelector('#video');
-var canvas = document.querySelector('#canvas');
-var img = document.querySelector('img');
-var ctx = canvas.getContext('2d');
-var cw = 360;
-var ch = 400;
-var imgur = '';
+var video = document.querySelector('#video')
+	, canvas = document.querySelector('#canvas')
+	, img = document.querySelector('#holder img')
+	, ctx = canvas.getContext('2d')
+	, cw = 360
+	, ch = 400
+	, imgur = ''
+	, userPos;
+
+var oFReader = new FileReader();
+
+oFReader.onload = function (oFREvent) {
+	var imgs = document.querySelectorAll(".preview");
+	var fileHolder = document.querySelector('#fileHolder');
+	fileHolder.parentNode.removeChild(fileHolder);
+	document.querySelector('#holder').innerHTML = '<img class="largePreview" src="'+oFREvent.target.result+'">';
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].src = oFREvent.target.result;
+	}
+};
+
+var renderToCanvas = function (img) {
+	ctx.drawImage(img, 0, 0);
+};
+
 
 var snapshot = function () {
 	video.style.display = 'none';
@@ -13,6 +31,19 @@ var snapshot = function () {
 	ctx.drawImage(video, 0, 0, cw, ch);
 	img.src = canvas.toDataURL('image/webp');
 	img.style.display = 'block';
+
+	var imgs = document.querySelectorAll(".preview");
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].src = canvas.toDataURL('image/webp');
+	}
+	reverseGeocode();
+};
+
+var previewFilters = function() {
+	if(document.querySelector('input[type=file]')) {
+		var oFile = document.querySelector("input[type=file]").files[0];
+		oFReader.readAsDataURL(oFile);
+	}
 };
 
 var sepia = function() {
@@ -23,9 +54,9 @@ var sepia = function() {
 	
 };
 
-var vibrance = function() {
+var contrast = function() {
 	Caman('#canvas', function () {
-		this.vibrance(15).render();
+		this.contrast(15).render();
 	});
 	img.src = canvas.toDataURL('image/webp');
 };
@@ -44,10 +75,14 @@ var grayscale = function() {
 	img.src = canvas.toDataURL('image/webp');
 };
 
-document.querySelector('#sepia').addEventListener('click', sepia);
-document.querySelector('#vibrance').addEventListener('click', vibrance);
-document.querySelector('#invert').addEventListener('click', invert);
-document.querySelector('#grayscale').addEventListener('click', grayscale);
+var saturate = function() {
+	Caman('#canvas', function () {
+		this.saturation(25).render();
+	});
+	img.src = canvas.toDataURL('image/webp');
+};
+
+
 
 var updateSliders = function() {
 	this.dataset['value'] = this.value;
@@ -63,8 +98,32 @@ var success = function (localStream) {
 	video.src = window.webkitURL.createObjectURL(localStream);
 };
 
+var failure = function () {
+	
+	video.parentNode.removeChild(video);
+	var holder = document.querySelector('#holder');
+	holder.innerHTML = '<div id="fileHolder"><div class="folder-icon"></div><input type="file" id="fileURL"/></div>';
+	document.querySelector('input[type=file]').addEventListener('change', previewFilters);	
+};
+
 var getData = function(el, dataname) {
 	return el.dataset[dataname];
+};
+
+var reverseGeocode = function() {
+	var geocoder = new google.maps.Geocoder();
+
+	navigator.geolocation.getCurrentPosition(function(position) {  
+		var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);  
+		geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[1]) {
+				userPos = results[1].formatted_address;
+			}
+		}
+	}); 
+
+	});
 };
 
 function share(){
@@ -76,9 +135,9 @@ var imgur = canvas.toDataURL().split(',')[1];
             type: 'base64',
             // get your key here, quick and fast http://imgur.com/register/api_anon
             key: 'c759641a0e36ec56239b7d6b1271821c',
-            name: 'photobooth.jpg',
-            title: 'test title',
-            caption: 'test caption',
+            name: 'Photobooth.jpg',
+            title: 'Photobooth',
+            caption: userPos,
             image: imgur
         },
         dataType: 'json'
@@ -91,6 +150,14 @@ var imgur = canvas.toDataURL().split(',')[1];
 
 document.querySelector('#share').addEventListener('click', share);
 
-navigator.webkitGetUserMedia({video:true}, success);
+if(navigator.webkitGetUserMedia)
+	navigator.webkitGetUserMedia({video:true}, failure);
+else 
+	failure();
 
 document.querySelector('#snapshot').addEventListener('click', snapshot);
+document.querySelector('#sepia').addEventListener('click', sepia);
+document.querySelector('#contrast').addEventListener('click', contrast);
+document.querySelector('#invert').addEventListener('click', invert);
+document.querySelector('#grayscale').addEventListener('click', grayscale);
+document.querySelector('#saturate').addEventListener('click', saturate);
