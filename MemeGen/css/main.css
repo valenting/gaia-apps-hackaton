@@ -8,6 +8,17 @@ div#largeimage
 	width:500px;
 	height:500px;
 }
+div#indexpage
+{
+	width:500px;
+	height:500px;
+	overflow:auto;
+}
+
+div.swappable
+{
+	position:relative;
+}
 div.inputbox
 {
 	width:500px;
@@ -16,8 +27,14 @@ input.inputbox
 {
 	width:500px;
 }
+
 canvas#pozah
 {
 	width:500px;
 	height:500px;
+}
+
+img
+{
+	margin-left:5px;
 }

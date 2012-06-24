@@ -1,20 +1,26 @@
 <!DOCTYPE html>	
 <html>
 	<head>
-		<LINK href="css/editnow.css" rel="stylesheet" type="text/css">
+		<LINK href="css/main.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<div id="largeimage">
-			<canvas id="pozah"></canvas>
+		<div id="indexpage" class="swappable" style="float:left">
+		
 		</div>
-		<div class="inputbox" >
-			<input type="text" name="upper" class="inputbox" oninput="updateUpper()" id="uppertext" value="Upper caption"/>
-		</div>
-		<div class="inputbox">
-			<input type="text" name="lower" class="inputbox" oninput="updateLower()" id="lowertext" value="Lower caption"/>
+		<div id="editpage" class="swappable" style="float:left">
+			<div id="largeimage">
+				<canvas id="pozah"></canvas>
+			</div>
+			<div class="inputbox" >
+				<input type="text" name="upper" class="inputbox" oninput="updateUpper()" id="uppertext" value="Upper caption"/>
+			</div>
+			<div class="inputbox">
+				<input type="text" name="lower" class="inputbox" oninput="updateLower()" id="lowertext" value="Lower caption"/>
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/editnow.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 		    drawCentralImage("socially-awkward-penguin.jpg");
@@ -22,6 +28,7 @@
 			//for some reason, simply calling clearAndRedraw() here doesn't work. fuck js.
 			writeText(50,uppertextfield.value);
 			writeText(450,lowertextfield.value);
+			drawIndex();
 		}
 	</script>
 </html>

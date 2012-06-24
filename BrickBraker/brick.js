@@ -11,9 +11,9 @@ $(window).load( function (e) {
 function Element(X, Y) {
 	this.X = X;
 	this.Y = Y;
-	this.size = 20;
-	this.speedX = 4;
-	this.speedY = 4;
+	this.size = 10;
+	this.speedX = 5;
+	this.speedY = 5;
 }
 
 var Bar = {
@@ -37,7 +37,7 @@ var Canvas = {
 	gameover : 0,
 
 	init : function () {
-		Game.ball = new Element(10, 10);
+		Game.ball = new Element(20, 20);
 		window.onkeypress = Canvas.doKeyDown;
 
 
@@ -75,13 +75,13 @@ var Canvas = {
 	},
 
 	animateBall : function (ball) {
-		if ( (ball.X + ball.size-10) >= this.sizeX || ball.X <= 5)
+		if ( (ball.X + ball.size) >= this.sizeX || ball.X <= ball.size)
 			ball.speedX = (-1) * ball.speedX;
 
-		if ( (ball.Y + ball.size-10) >= this.sizeY || ball.Y <= 5)
+		if ( (ball.Y + ball.size) >= this.sizeY || ball.Y <= ball.size)
 			ball.speedY = (-1) * ball.speedY;
 
-		if ( ball.Y >= Bar.Y) {
+		if ( ball.Y + ball.size >= Bar.Y) {
 			if (ball.X > Bar.X && ball.X < Bar.X + 100)
 				ball.speedY = (-1) * ball.speedY;
 			else 
@@ -93,7 +93,7 @@ var Canvas = {
 		ball.Y += ball.speedY;
 
 		CTX.beginPath();
-		CTX.arc(ball.X, ball.Y, 10, 0, Math.PI*2, true);	
+		CTX.arc(ball.X, ball.Y, ball.size, 0, Math.PI*2, true);	
 		CTX.closePath();
 		CTX.fill();		
 	},
