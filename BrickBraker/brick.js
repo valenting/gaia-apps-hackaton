@@ -95,13 +95,7 @@ var Canvas = {
 	defaultSpeed : 1,
 	
 	init : function () {
-<<<<<<< HEAD
-		Game.ball = new Element((CNV.width - 20)/2, 705);
-		Game.bar = new Element((CNV.width - 100)/2, 725);
-=======
-		
 		Game.bar = new Element(CNV.width/2 - 50, CNV.height-100);
->>>>>>> 3cb8e4046da6171f2ac5ec8ae7f08e1a44bd60d9
 		Game.bar.setSize(100, 20);
 		Game.ball = new Element(CNV.width/2,Game.bar.Y);
 		Game.ball.Y -= 2*Game.ball.size;
@@ -116,33 +110,16 @@ var Canvas = {
 			Game.bricks[k] = new Element(j,i);
 			Game.bricks[k].setSize(50,20);
 			}
-<<<<<<< HEAD
-		}		
-=======
 		}
 		
-		document.getElementById("canvas").addEventListener('mousedown', function(evt){
-			this.mouse = getMousePos(CNV, evt);
-			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -8; 
-			else 
-				Game.bar.dir = 8; 
-		}, false);
-
-
-
-		document.getElementById("canvas").addEventListener('mouseup', function(evt){
-				Game.bar.dir = 0; 
-		}, false);
->>>>>>> 3cb8e4046da6171f2ac5ec8ae7f08e1a44bd60d9
-
 		function render() {
 			if (Canvas.gameover == 0) {
 				requestAnimFrame(render);
 				Canvas.draw();
 			}
 			
-			else writeMessage(CNV,"Game Over");
+			else 
+				writeMessage(CNV,"Game Over");
 		}
 
 		render();
@@ -197,17 +174,13 @@ var Canvas = {
 			ball.speedY = (-1) * ball.speedY;
 
 		if ( ball.Y + ball.size >= Game.bar.Y) {
-<<<<<<< HEAD
-			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + Game.bar.width + ball.size)
-				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X + 50 )/60));
-=======
-			if (ball.X >= Game.bar.X - ball.size - 5 && ball.X <= Game.bar.X + Game.bar.width + ball.size + 5) {
-				var aux = Math.abs(Game.bar.X - ball.X + (10 + 2 * ball.size + Game.bar.width)/2)/((10 + 2 * ball.size + Game.bar.width)/2);
-				ball.speedY = -1 * ( -8 * aux * aux+ aux +8);
-			}
->>>>>>> 3cb8e4046da6171f2ac5ec8ae7f08e1a44bd60d9
-			else 
-				Canvas.gameover = 1;
+
+		if (ball.X >= Game.bar.X - ball.size - 5 && ball.X <= Game.bar.X + Game.bar.width + ball.size + 5) {
+			var aux = Math.abs(Game.bar.X - ball.X + (10 + 2 * ball.size + Game.bar.width)/2)/((10 + 2 * ball.size + Game.bar.width)/2);
+			ball.speedY = -1 * ( -8 * aux * aux+ aux +8);
+		}
+		else 
+			Canvas.gameover = 1;
 		}
 
 
