@@ -8,6 +8,23 @@ $(window).load( function (e) {
 });
 
 
+
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+	return  window.requestAnimationFrame|| 
+	window.webkitRequestAnimationFrame	|| 
+	window.mozRequestAnimationFrame		|| 
+	window.oRequestAnimationFram		|| 
+	window.msRequestAnimationFrame		|| 
+	function( callback ){
+		window.setTimeout(callback, 1000 / 60);
+	};
+})();
+
+
+
+
 function Element(X, Y) {
 	this.X = X;
 	this.Y = Y;
@@ -41,49 +58,38 @@ var Canvas = {
 
 	init : function () {
 		Game.ball = new Element(20, 20);
-		Game.bar = new Element(100, 700);
+		Game.bar = new Element(100, 725);
 		Game.bar.setSize(100, 20);
 
-		document.getElementById("canvas").addEventListener('mousedown', function(evt){
-			this.mouse = getMousePos(CNV, evt);
-			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -5; 
-			else 
-				Game.bar.dir = 5; 
-//			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
-//			writeMessage(CNV, message);
-		}, false);
-
-
-
-		document.getElementById("canvas").addEventListener('mouseup', function(evt){
-				Game.bar.dir = 0; 
-		}, false);
-
+		this.addMouseTouch();
 
 
 
 		function render() {
-			if (Canvas.gameover == 0) {
+//			if (Canvas.gameover == 0) {
 				requestAnimFrame(render);
 				Canvas.draw();
-			}
+//			}
 			
-			else writeMessage(CNV,"Game Over");
+//			else writeMessage(CNV,"Game Over");
 		}
 
 		render();
 	},
 	
-	
-	addTouchEvent : function (event) {
-		for (var i = 0; i < event.touches.length; i++) {
-			var touch = event.touches[i];
-			CTX.beginPath();
-			CTX.arc(touch.pageX, touch.pageY, 20, 0, 2*Math.PI, true);
-			CTX.fill();
-			CTX.stroke();
-		}
+	addMouseTouch : function  () {
+		$("#touchLeft").mousedown(function(e) {
+			Game.bar.dir = -Game.bar.speedX; 
+		});
+
+		$("#touchRight").mousedown(function(e) {
+			Game.bar.dir = Game.bar.speedX; 
+		});
+
+		$(document).mouseup(function (e) {
+			Game.bar.dir = 0; 
+		});
+
 	},
 	
 	draw : function () {
@@ -125,17 +131,6 @@ var Canvas = {
 		CTX.closePath();
 		CTX.fill();		
 	},
-
-	doKeyDown : function (event) {
-		switch (event.keyCode) {
-				case 37: /*Left arrow*/
-						Game.bar.X -= Game.bar.speed;
-					break;
-				case 39: /*Right arrow*/
-						Game.bar.X += Game.bar.speed;
-					break;
-		}
-	}
 }
 
 
@@ -168,15 +163,3 @@ function getMousePos(canvas, evt){
     };
 }
 
-
-// shim layer with setTimeout fallback
-window.requestAnimFrame = (function(){
-	return  window.requestAnimationFrame|| 
-	window.webkitRequestAnimationFrame	|| 
-	window.mozRequestAnimationFrame		|| 
-	window.oRequestAnimationFram		|| 
-	window.msRequestAnimationFrame		|| 
-	function( callback ){
-		window.setTimeout(callback, 1000 / 60);
-	};
-})();
