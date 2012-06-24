@@ -1,6 +1,6 @@
 
 canvas {
-	opacity:0;
+	//opacity:0;
 }
 
 img {
@@ -9,6 +9,16 @@ img {
 	border-bottom: 40px solid white;
 	box-shadow: 0 0 5px #aaa;
 }
+
+	img.preview {
+		display:block !important;
+		border:none;
+		width:50px;
+	}
+
+	img.largePreview {
+		display:block !important;
+	}
 
 video {
 	background:#fff;
@@ -30,4 +40,35 @@ input[type=range]:after {
 
 .hero-unit {
 	margin-top:5%;
+}
+
+input[type="file"] { height:200px;position:absolute; top:0; left:-50px;opacity:0; }
+
+#fileHolder{width: 380px; height: 200px; overflow:hidden;position:relative;}
+
+.folder-icon{ margin:30px auto; background-image:url('http://cdn5.iconfinder.com/data/icons/Eko_Folders_by_kyo_tux/128/Downloads.png'); height:128px;width:128px;}
+
+#sepia img {
+	-webkit-filter: sepia(0.8);
+	-moz-filter: sepia(0.8);
+}
+
+#invert img {
+	-webkit-filter: invert(0.8);
+	-moz-filter: invert(0.8);
+}
+
+#contrast img {
+	-webkit-filter: contrast(3);
+	-moz-filter: contrast(3);
+}
+
+#grayscale img {
+	-webkit-filter: grayscale(1);
+	-moz-filter: grayscale(1);
+}
+
+#saturate img {
+	-webkit-filter: saturate(5);
+	-moz-filter: saturate(5);
 }

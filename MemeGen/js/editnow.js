@@ -4,6 +4,16 @@
 		var lowertextfield=document.getElementById("lowertext");
 		var centralimage=null;
 		var textcolor="FFFFFF";
+		function goBackToIndex()
+		{
+			uppertextfield.value='Upper caption';
+			lowertextfield.value='Lower caption';
+			textcolor="FFFFFF";
+			document.getElementById("indexpage").style.left='0px';
+			document.getElementById("editpage").style.visibility='hidden';
+			document.getElementById("editpage").style.left='500px';
+			
+		}
 		function updateUpper()
 		{
 			clearAndRedraw();
@@ -69,7 +79,7 @@
 					// get your key here, quick and fast http://imgur.com/register/api_anon
 					key: 'fc862c0aa18287070c439c8c0f039bca',
 					name: 'meme.jpg',
-					title: 'memegen',
+					title: 'Check out this meme pic I made!',
 					caption: 'Created with the hackaton Meme Generator!',
 					image: img
 				},
@@ -80,8 +90,33 @@
 				w.close();
 				imgurl.value=x;
 				imgurl.style.visibility='visible';
+				fb_share(x);
 			}).error(function() {
 				alert('Could not reach api.imgur.com. Sorry :(');
 				w.close();
 			});
-}
+		}
+		function fb_share(link)
+		{
+			//TODO : verify if this wasn't built already :)
+			//we need to recreate this every single fucking time since something
+			//weird is happening and we can't just change the image ourselves :(
+			// fb share
+			//	<div id="fb_div">
+			var fb_div = document.createElement("div");
+			fb_div.id = "fb_div";
+			
+			//	<a name="fb_share">
+			var fb_a = document.createElement("a");
+			fb_a.name = "fb_share";
+			fb_a.setAttribute('share_url',link);// the link to be shared
+			fb_div.appendChild(fb_a);
+			
+			//	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share">
+			var fb_script = document.createElement("script");
+			fb_script.src = "http://static.ak.fbcdn.net/connect.php/js/FB.Share";
+			fb_script.type = "text/javascript";
+			fb_div.appendChild(fb_script);
+			var buttonzdiv=document.getElementById("allthebuttons");
+			buttonzdiv.appendChild(fb_div);
+		}
