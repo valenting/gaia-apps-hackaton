@@ -17,7 +17,7 @@
 			context.clearRect(0,0,500,500);
 			drawcentralimage();
 			writeText(50,uppertextfield.value);
-			writeText(450,lowertextfield.value);
+			writeText(centralimage.height-50,lowertextfield.value);
 		}
 		function writeText(pos,text)
 		{
@@ -26,12 +26,7 @@
 			context.strokeStyle="#FFFFFF";
 			context.font="bold 32px impact";
 			context.textAlign="center";
-			context.fillText(text, 250, pos,400);
-		}
-		function doSomething(e) {
-			if (e.keyCode) code = e.keyCode;
-			else if (e.which) code = e.which;
-			alert(e.code);
+			context.fillText(text,centralimage.width/2, pos, centralimage.width-100);
 		}
 		
 		function drawCentralImage(source) {
@@ -41,9 +36,11 @@
 		}
 		
 		function drawcentralimage() {
-			canvas.width=500;
-			canvas.height=500;
-			context.drawImage(centralimage,0,0,500,500);
+			uppertextfield.style.width=centralimage.width+"px";
+			lowertextfield.style.width=centralimage.width+"px";
+			canvas.width=centralimage.width;
+			canvas.height=centralimage.height;
+			context.drawImage(centralimage,0,0,canvas.width,canvas.height);
 		}
 		
 
@@ -72,9 +69,11 @@
 				},
 				dataType: 'json'
 			}).success(function(data) {
+				var imgurl=document.getElementById("imageURL");
 				var x=data['upload']['links']['imgur_page'];
 				w.close();
-				document.getElementById("imageURL").value=x;
+				imgurl.value=x;
+				imgurl.style.visibility='visible';
 			}).error(function() {
 				alert('Could not reach api.imgur.com. Sorry :(');
 				w.close();
