@@ -11,17 +11,42 @@ $(window).load( function (e) {
 function Element(X, Y) {
 	this.X = X;
 	this.Y = Y;
-	this.size = 10;
+	this.size = 10; // trebuie schimbat in radius
 	this.width = 10;
 	this.height = 10;
 	
 	this.speedX = 5;
 	this.speedY = 5;
 	this.dir = 0;
+	this.color = "red";
+	this.draw = true;
 	
 	this.setSize = function (width, height) {
 		this.width = width;
 		this.height = height;
+	}
+	this.setColor = function (color) {
+		this.color = color;
+	}
+	
+	this.colision = function (ball) {
+		//1 up
+		
+		if(ball.X >= this.X &&  ball.X <= this.X + this.width ) {
+			if( ball.size >= Math.abs(this.Y - ball.Y) ||  ball.size >= Math.abs(this.Y - ball.Y + this.height) ) {
+				// up and down
+				ball.speedY *=-1;
+				this.draw = false;
+			}		
+		}
+		
+		if(ball.Y >= this.Y &&  ball.Y <= this.Y + this.height ) {
+			if( ball.size >= Math.abs(this.X - ball.X) ||  ball.size >= Math.abs(this.X - ball.X + this.width) ) {
+				//left and right
+				ball.speedX *=-1;
+				this.draw = false;
+			}		
+		}
 	}
 }
 
@@ -29,6 +54,7 @@ function Element(X, Y) {
 var Game = {
 	ball : null,
 	bar : null,
+	bricks : null,
 }
 
 
@@ -38,18 +64,28 @@ var Canvas = {
 	sizeY : 800,
 	mouse : null,
 	gameover : 0,
-
+	defaultSpeed : 5,
+		
 	init : function () {
 		Game.ball = new Element(20, 20);
 		Game.bar = new Element(100, 700);
 		Game.bar.setSize(100, 20);
 
+		Game.bricks = new Array();
+		for(k=0,i = 100;i<400;i+=25){
+			for(j = 75; j<405;j+=55,k++) {
+			Game.bricks[k] = new Element(j,i);
+			Game.bricks[k].setSize(50,20);
+			}
+		}
+			
+		
 		document.getElementById("canvas").addEventListener('mousedown', function(evt){
 			this.mouse = getMousePos(CNV, evt);
 			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -5; 
+				Game.bar.dir = -2*Game.bar.speedX; 
 			else 
-				Game.bar.dir = 5; 
+				Game.bar.dir = 2*Game.bar.speedY; 
 //			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
 //			writeMessage(CNV, message);
 		}, false);
@@ -86,16 +122,30 @@ var Canvas = {
 		}
 	},
 	
+
+	
 	draw : function () {
 		CTX.clearRect(0, 0, 480, 800);
 
 		this.animateBall(Game.ball);
 		this.animateBar(Game.bar);
-
+		this.drawBricks(Game.bricks,Game.ball);
+		
 		CTX.fillStyle = "#000";
 		CTX.fillRect(Game.bar.X, Game.bar.Y, 100, 20);
 	},
-
+	
+	drawBricks: function(bricks,ball) {
+		for(i = 0;i<bricks.length;i++) {
+			if(bricks[i].draw === true) {
+				bricks[i].colision(ball);
+				if(bricks[i].draw == true) { 
+					CTX.fillStyle = bricks[i].color;
+					CTX.fillRect(bricks[i].X, bricks[i].Y, bricks[i].width,bricks[i].height);
+				}
+			}
+		}
+	},
 
 	animateBar : function (bar) {
 		bar.X += bar.dir;
@@ -111,7 +161,7 @@ var Canvas = {
 
 		if ( ball.Y + ball.size >= Game.bar.Y) {
 			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + 100 + ball.size)
-				ball.speedY = (-1) * ball.speedY;
+				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X +50)/60));
 			else 
 				Canvas.gameover = 1;
 		}

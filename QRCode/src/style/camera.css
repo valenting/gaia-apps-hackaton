@@ -2,9 +2,11 @@ html, body {
   height: 100%;
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0px;
   overflow: hidden;
   background-color: black;
+  text-align: center;
+  color: white;
 }
 
 #viewfinder {
@@ -60,4 +62,16 @@ html, body {
 
 #gallery-button:active {
   background-image: url('images/gallery-pressed.png');
+}
+
+#panel {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+
+p.message {
+  width: 100%;
+    word-wrap: break-word;
 }

@@ -10,19 +10,21 @@
 			<div class="row">
 				<div class="span6">
 					<h1>Photobooth</h1>
-					<p>Take a snapshot of yourself or anything else</p>
-					<p>Add filters</p>
-					<p>Share with everybody!</p>
-					<a href="#" id="sepia" class="btn">Sepia</a>
-					<a href="#" id="vibrance" class="btn">Vibrance</a>
-					<a href="#" id="invert" class="btn">Invert</a>
-					<a href="#" id="grayscale" class="btn">Grayscale</a>
+					<p><i class="icon-user"></i>Take a snapshot of yourself or anything else</p>
+					<p><i class="icon-adjust"></i> Add filters</p>
+					<p><i class="icon-thumbs-up"></i> Share with everybody!</p>
+					<a href="#" id="sepia" class="btn">Sepia <img class="preview"></a>
+					<a href="#" id="contrast" class="btn">Contrast <img class="preview"></a>
+					<a href="#" id="invert" class="btn">Invert <img class="preview"></a>
+					<a href="#" id="grayscale" class="btn">Grayscale <img class="preview"></a>
+					<a href="#" id="saturate" class="btn">Saturate <img class="preview"></a>
 				</div>
-				<div class="span4">
+				<div class="span4" id="holder">
 					<video id="video" width="360" height="400" autoplay></video>
 					<img src="img/polaroid.jpg">
 				</div>
 			</div>
+			<br>
 			<div class="btn-group">
 				<a href="#" id="snapshot" class="btn btn-primary btn-large">Take Snapshot!</a>
 				<a href="#" id="share" class="btn btn-success btn-large">Share!</a>
@@ -39,5 +41,6 @@
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/caman.full.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="js/script.js"></script>
 </html>
