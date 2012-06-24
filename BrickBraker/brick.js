@@ -16,7 +16,7 @@ function Element(X, Y) {
 	this.height = 10;
 	
 	this.speedX = 5;
-	this.speedY = 5;
+	this.speedY = -5;
 	this.dir = 0;
 	this.color = "red";
 	this.draw = true;
@@ -32,7 +32,7 @@ function Element(X, Y) {
 	this.colision = function (ball) {
 		//1 up
 		
-		if(ball.X >= this.X &&  ball.X <= this.X + this.width ) {
+		if(ball.X >= this.X  &&  ball.X <= this.X + this.width ) {
 			if( ball.size >= Math.abs(this.Y - ball.Y) ||  ball.size >= Math.abs(this.Y - ball.Y + this.height) ) {
 				// up and down
 				ball.speedY *=-1;
@@ -64,30 +64,29 @@ var Canvas = {
 	sizeY : 800,
 	mouse : null,
 	gameover : 0,
-	defaultSpeed : 5,
-		
+	defaultSpeed : 1,
+	
 	init : function () {
-		Game.ball = new Element(20, 20);
-		Game.bar = new Element(100, 700);
+		
+		Game.bar = new Element(CNV.width/2 - 50, CNV.height-100);
 		Game.bar.setSize(100, 20);
+		Game.ball = new Element(CNV.width/2,Game.bar.Y);
+		Game.ball.Y -= 2*Game.ball.size;
 
 		Game.bricks = new Array();
 		for(k=0,i = 100;i<400;i+=25){
-			for(j = 75; j<405;j+=55,k++) {
+			for(j = 20; j<460;j+=55,k++) {
 			Game.bricks[k] = new Element(j,i);
 			Game.bricks[k].setSize(50,20);
 			}
 		}
-			
 		
 		document.getElementById("canvas").addEventListener('mousedown', function(evt){
 			this.mouse = getMousePos(CNV, evt);
 			if (this.mouse.x <= Canvas.sizeX / 2)
-				Game.bar.dir = -2*Game.bar.speedX; 
+				Game.bar.dir = -8; 
 			else 
-				Game.bar.dir = 2*Game.bar.speedY; 
-//			var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
-//			writeMessage(CNV, message);
+				Game.bar.dir = 8; 
 		}, false);
 
 
@@ -95,9 +94,6 @@ var Canvas = {
 		document.getElementById("canvas").addEventListener('mouseup', function(evt){
 				Game.bar.dir = 0; 
 		}, false);
-
-
-
 
 		function render() {
 			if (Canvas.gameover == 0) {
@@ -142,6 +138,14 @@ var Canvas = {
 				if(bricks[i].draw == true) { 
 					CTX.fillStyle = bricks[i].color;
 					CTX.fillRect(bricks[i].X, bricks[i].Y, bricks[i].width,bricks[i].height);
+				} else {
+					for(;i<bricks.length;i++) {
+						if(bricks[i].draw == true) { 
+						CTX.fillStyle = bricks[i].color;
+						CTX.fillRect(bricks[i].X, bricks[i].Y, bricks[i].width,bricks[i].height);
+						} 
+					}
+					return;
 				}
 			}
 		}
@@ -160,8 +164,10 @@ var Canvas = {
 			ball.speedY = (-1) * ball.speedY;
 
 		if ( ball.Y + ball.size >= Game.bar.Y) {
-			if (ball.X > Game.bar.X - ball.size && ball.X < Game.bar.X + 100 + ball.size)
-				ball.speedY = -1 * ((Canvas.defaultSpeed+2 ) *(1-Math.abs(Game.bar.X - ball.X +50)/60));
+			if (ball.X >= Game.bar.X - ball.size - 5 && ball.X <= Game.bar.X + Game.bar.width + ball.size + 5) {
+				var aux = Math.abs(Game.bar.X - ball.X + (10 + 2 * ball.size + Game.bar.width)/2)/((10 + 2 * ball.size + Game.bar.width)/2);
+				ball.speedY = -1 * ( -8 * aux * aux+ aux +8);
+			}
 			else 
 				Canvas.gameover = 1;
 		}
