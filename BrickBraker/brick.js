@@ -4,7 +4,7 @@ var CNV = null;
 $(window).load( function (e) {
 	CNV = document.getElementById("canvas");
 	CTX = CNV.getContext('2d'); 
-	Canvas.init();
+	Canvas.start();	
 });
 
 
@@ -91,18 +91,18 @@ var Canvas = {
 	sizeX : 480,
 	sizeY : 800,
 	mouse : null,
+	startgame : 0,
 	gameover : 0,
 	defaultSpeed : 1,
 	
-	init : function () {
+	start : function () {
+		CNV.removeEventListener('mousedown', Canvas.start); 
+		
+		Canvas.gameover = 0;		
+
 		Game.bar = new Element(CNV.width/2 - 50, CNV.height-100);
 		Game.bar.setSize(100, 20);
-		Game.ball = new Element(CNV.width/2,Game.bar.Y);
-		Game.ball.Y -= 2*Game.ball.size;
-
-
-		this.addMouseDir();
-
+		Game.ball = new Element(CNV.width/2-5, Game.bar.Y-2);
 
 		Game.bricks = new Array();
 		for(k=0,i = 100;i<400;i+=25){
@@ -112,14 +112,32 @@ var Canvas = {
 			}
 		}
 		
+		Canvas.draw();
+		
+		writeMessage(CNV,"Click to start the Game");
+
+		CNV.addEventListener('mousedown', Canvas.startInit, false);
+		
+	},
+	
+	startInit : function () {
+		Canvas.init();
+		CNV.removeEventListener('mousedown', Canvas.startInit); 		
+	},
+	
+	init : function () {
+		this.addMouseDir();
+		
 		function render() {
 			if (Canvas.gameover == 0) {
 				requestAnimFrame(render);
 				Canvas.draw();
 			}
-			
-			else 
-				writeMessage(CNV,"Game Over");
+
+			else {
+				writeMessage(CNV, "Game Over");
+				CNV.addEventListener('mousedown', Canvas.start, false);
+			}
 		}
 
 		render();
@@ -216,8 +234,9 @@ function writeMessage(canvas, message){
     context.fillStyle = "rgba(255, 255, 255, 0.7)"; ;
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.font = '30pt Calibri';
+	context.textAlign = 'center'
     context.fillStyle = 'black';
-    context.fillText(message, 100, canvas.height/2);
+    context.fillText(message, canvas.width/2, canvas.height/2 + 50);
 }
  
 function getMousePos(canvas, evt){
