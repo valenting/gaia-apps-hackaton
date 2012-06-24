@@ -1,0 +1,3 @@
+[submodule "boot2twitter"]
+	path = boot2twitter
+	url = https://github.com/topliceanu/boot2twitter
