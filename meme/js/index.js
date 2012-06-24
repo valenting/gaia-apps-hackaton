@@ -35,9 +35,8 @@ function drawIndex() {
 function setSource()
 {
 	drawCentralImage("TemplatePics\\"+this.id+'.jpg');
-	
 	document.getElementById("editpage").style.visibility='visible';
-	$("#indexpage").animate({width:0},"slow");
 	document.getElementById("indexpage").style.left='-510px';
-	document.getElementById("editpage").style.left='-95px';
+	document.getElementById("indexpage").style.visibility="hidden";
+	document.getElementById("editpage").style.left='-590px';
 }
