@@ -9,9 +9,11 @@
 			uppertextfield.value='Upper caption';
 			lowertextfield.value='Lower caption';
 			textcolor="FFFFFF";
-			document.getElementById("indexpage").style.left='0px';
+			$("#indexpage").animate({width:500},"slow");
+			$("#editpage").animate({width:0},"slow");
 			document.getElementById("editpage").style.visibility='hidden';
-			document.getElementById("editpage").style.left='500px';
+			document.getElementById("editpage").style.left='450px';
+			document.getElementById("indexpage").style.left='-50px';
 			
 		}
 		function updateUpper()
@@ -24,7 +26,6 @@
 		}
 		function clearAndRedraw()
 		{
-			//alert('click!');
 			context.clearRect(0,0,500,500);
 			drawcentralimage();
 			writeText(50,uppertextfield.value);
